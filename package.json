@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vue/cli": "^4.5.11",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "html-pdf": "^2.2.0",
-    "html-pdf-node": "^1.0.7"
+    "html-pdf-node": "^1.0.7",
+    "vue": "^2.6.12"
   }
 }
