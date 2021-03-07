@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factuur</title>
+</head>
+
+<body>
+    <div class="container top">
+        <div class="item logoCol"><img src="https://jjdeveloping.nl/wp-content/uploads/2020/06/logo-300x150.png"
+                alt="Logo"></div>
+        <div class="item jjInfoCol">
+            <p>
+                JJ Developing <br>
+                Vasalisstraat 47 <br>
+                1822MK Alkmaar <br>
+                <br>
+                KvK nr: 78456193 <br>
+                BTW nr: NL861406163B01
+                <br><br>
+                IBAN: NL35 ABNA 0887 1593 11
+            </p>
+        </div>
+    </div>
+    <div class="container customerinfo">
+        <div class="item adress">
+            <b><%= invoice.customer_name %></b><br>
+            <%= invoice.customer_address1 %><br>
+            <%= invoice.customer_address2 %>
+        </div>
+    </div>
+    <div class="container factuurinfo">
+        <div class="item factuur">
+            <h1>Factuur</h1>
+            <p>Factuurnummer: <%= invoice.invoice_number %></p>
+        </div>
+        <div class="item factuurDatum">
+            <p>Factuurdatum: <%= invoice.today %><br>Vervaldatum: <%= invoice.payment_term %></p>
+
+        </div>
+    </div>
+
+    <div class="products">
+        <div class="item mainTable">
+            <table class="productTable">
+                <thead>
+                    <tr>
+                        <th>Aantal</th>
+                        <th>Omschrijving</th>
+                        <th>Bedrag</th>
+                        <th>Totaal</th>
+                        <th>BTW</th>
+                    </tr>
+                </thead>
+                <tbody class="products">
+                    <% let product; let totaal = 0; for (product of invoice.products) { %>
+                    <tr>
+                        <td><%= product.aantal %> </td>
+                        <td><%= product.dienst %></td>
+                        <td>&euro;<%= product.prijs %></td>
+                        <td>&euro;<%= parseInt(product.aantal) * parseInt(product.prijs) %></td>
+                        <td>0%</td>
+                    </tr>
+                    <% totaal +=  parseInt(product.aantal) * parseInt(product.prijs)} %> 
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Subtotaal</td>
+                        <td>&euro;<%= totaal %></td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Korting</td>
+                        <td>&euro;0</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>BTW</td>
+                        <td>0%</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Totaal</td>
+                        <td><b>&euro;<%= totaal %>,-</b></td>
+                        <td>0%</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div style="" class="container footerText">
+        <div class="item fText">U heeft 7 dagen de betaling te voldoen op rekeningnummer NL35 ABNA 0887 1593 11</div>
+    </div>
+</body>
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    * {
+        font-family: Poppins;
+    }
+
+    .logoCol,
+    .adress {
+        margin: 10px 0px 0px 10px;
+    }
+
+    .factuur {
+        margin-left: 10px;
+    }
+
+    .factuurDatum {
+        margin-top: 90px;
+    }
+
+    .main {
+        color: blue;
+    }
+
+    .container {
+        display: flex;
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+        justify-content: space-between;
+    }
+
+    .footerText {
+        font-size: 12px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .products {
+        justify-content: none;
+    }
+
+    .mainTable {
+        border: 1px solid black;
+    }
+
+    .productTable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 16px;
+    }
+
+    tbody>tr,
+    th {
+        border-bottom: 1px solid black;
+    }
+</style>
+
+</html>

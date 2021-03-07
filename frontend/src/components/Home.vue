@@ -24,9 +24,14 @@
                         <label for="customer_address">Adres klant:</label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Adres klant" name="customer_address" v-model="invoice.customer_address" required>
+                        <input type="text" placeholder="Straat 123" name="customer_address1" v-model="invoice.customer_address1" required>
                     </td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="text" placeholder="1111AA Alkmaar" name="customer_address2" v-model="invoice.customer_address2" required>
+                    </td>
                 <tr>
                     <td>
                         <label for="payment_term">Betaal termijn in dagen:</label>
@@ -59,13 +64,15 @@
 
 <script>
 import * as FileSaver from 'file-saver';
+import axios from 'axios';
 export default {
     data() {
         return {
             invoice: {
                 invoice_number: '',
                 customer_name: '',
-                customer_address: '',
+                customer_address1: '',
+                customer_address2: '',
                 payment_term: '',
                 products: '',
                 note: ''
@@ -86,18 +93,27 @@ export default {
                 products.push(product);
             }
             this.invoice.products = products;
-            fetch('/makeinvoice',{
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: {
-                    invoice: this.invoice
-                },
-                method: "get"
+            let invoice = this.invoice;
+            let json = JSON.stringify(invoice)
+
+            axios.get('http://localhost:3000/test', {
+                params: {
+                    json
+                }
+            }).then(() => {
+                setTimeout(() => {  
+                    fetch('/makeinvoice',{
+                    headers:{
+                        "Content-Type": "application/json"
+                    },
+                    method: "get"
                 }).then(res=>res.blob()).then((res=>{
-                console.log(res)
-                FileSaver.saveAs(res, 'kameel');
-            }))
+                    console.log(res)
+                    FileSaver.saveAs(res, 'kameel');
+                }))
+                 }, 5000);
+                
+            })  
         }
     }
 }
