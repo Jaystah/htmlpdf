@@ -56,20 +56,22 @@
                     </tr>
                 </thead>
                 <tbody class="products">
+                    <% let product; let totaal = 0; for (product of invoice.products) { %>
                     <tr>
-                        <td>1</td>
-                        <td>Complete websitah</td>
-                        <td>&euro;600,-</td>
-                        <td>&euro;600,-</td>
+                        <td><%= product.aantal %> </td>
+                        <td><%= product.dienst %></td>
+                        <td>&euro;<%= product.prijs %></td>
+                        <td>&euro;<%= parseInt(product.aantal) * parseInt(product.prijs) %></td>
                         <td>0%</td>
                     </tr>
+                    <% totaal +=  parseInt(product.aantal) * parseInt(product.prijs)} %> 
                 </tbody>
                 <tfoot>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>Subtotaal</td>
-                        <td>&euro;730</td>
+                        <td>&euro;<%= totaal %></td>
                         <td>0%</td>
                     </tr>
                     <tr>
@@ -97,7 +99,7 @@
                         <td></td>
                         <td></td>
                         <td>Totaal</td>
-                        <td><b>&euro;600,-</b></td>
+                        <td><b>&euro;<%= totaal %>,-</b></td>
                         <td>0%</td>
                     </tr>
                 </tfoot>

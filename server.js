@@ -20,9 +20,9 @@ app.get('/makeinvoice', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-    let invoice = req.query;
-    
-    invoice = JSON.parse(invoice.json).invoice;
+    let invoice = req.query.json;
+    invoice = JSON.parse(invoice);
+    console.log(invoice);
     let d = new Date();
     invoice.today = convertDate(d.toISOString().substr(0, 10));
     d.setDate(d.getDate() + parseInt(invoice.payment_term))

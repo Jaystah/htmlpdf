@@ -93,7 +93,9 @@ export default {
                 products.push(product);
             }
             this.invoice.products = products;
-            const json = JSON.stringify({invoice: this.invoice})
+            let invoice = this.invoice;
+            let json = JSON.stringify(invoice)
+
             axios.get('http://localhost:3000/test', {
                 params: {
                     json
