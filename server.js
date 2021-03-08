@@ -6,7 +6,7 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000;
 app.use(cors())
 app.get('/makeinvoice', (req, res) => {
-   // const { products, invoice_number, payment_term, note } = req.body;
+   // const { invoice } = req.body;
    console.log('yo')
     var file = fs.createReadStream('./factuur.pdf');
     var stat = fs.statSync('./factuur.pdf');
