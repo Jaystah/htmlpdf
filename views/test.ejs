@@ -106,29 +106,34 @@
             </table>
         </div>
     </div>
-
+    <div class="container note">
+        <div class="item noteText"><b>NB:</b> Je moeder</div>
+    </div>
     <div style="" class="container footerText">
-        <div class="item fText">U heeft 7 dagen de betaling te voldoen op rekeningnummer NL35 ABNA 0887 1593 11</div>
+        <div class="item fText">U heeft <%= invoice.payment_term %> dagen de betaling te voldoen op rekeningnummer NL35 ABNA 0887 1593 11</div>
     </div>
 </body>
 <style type="text/css">
     @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
     * {
-        font-family: Poppins;
+        font-family: Arial;
     }
 
     .logoCol,
     .adress {
         margin: 10px 0px 0px 10px;
     }
-
+    .jjInfoCol{
+        text-align: right;
+    }
     .factuur {
         margin-left: 10px;
     }
 
     .factuurDatum {
         margin-top: 90px;
+        margin-bottom: 30px;
     }
 
     .main {
@@ -141,10 +146,21 @@
         -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
         justify-content: space-between;
     }
+    .note{
+        margin-top: 50px;
+        justify-content: center !important;
+        -webkit-justify-content: center !important;
+        -webkit-box-pack: center !important;
+    }
+    .noteText{
+        text-align: center;
+    }
 
     .footerText {
         font-size: 12px;
-        justify-content: center;
+        justify-content: center !important;
+        -webkit-justify-content: center !important;
+        -webkit-box-pack: center !important;
         margin-top: 30px;
     }
 
